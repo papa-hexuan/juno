@@ -7,5 +7,7 @@ import (
 type cmc struct{}
 
 type confu struct {
-	DB *gorm.DB
+	DB      *gorm.DB
+	GitPath string
+	GitRepo string
 }

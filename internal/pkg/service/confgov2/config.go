@@ -1444,3 +1444,12 @@ func GetAllConfigByEnv(env string) (resp map[uint]struct{}, err error) {
 
 	return
 }
+
+func GetAllConfigByAid(aid int) ([]db.Configuration, error) {
+	list := make([]db.Configuration, 0)
+	err := mysql.Select("id, aid, name, content, format, env, zone, version").Where("aid = ?", aid).Find(&list).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return list, nil
+}

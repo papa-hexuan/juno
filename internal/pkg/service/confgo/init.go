@@ -1,6 +1,9 @@
 package confgo
 
-import "github.com/douyu/juno/internal/pkg/invoker"
+import (
+	"github.com/douyu/juno/internal/pkg/invoker"
+	"github.com/douyu/juno/pkg/cfg"
+)
 
 var (
 	// Cmc ...
@@ -13,6 +16,8 @@ var (
 func Init() {
 	Cmc = &cmc{}
 	ConfuSrv = &confu{
-		DB: invoker.JunoMysql,
+		DB:      invoker.JunoMysql,
+		GitPath: cfg.Cfg.Configure.GitPath,
+		GitRepo: cfg.Cfg.Configure.GitRepo,
 	}
 }

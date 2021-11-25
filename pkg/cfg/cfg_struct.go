@@ -207,6 +207,8 @@ type Configure struct {
 	Agent    struct {
 		Port int `json:"port"`
 	} `json:"agent"`
+	GitPath string `json:"gitPath"`
+	GitRepo string `json:"gitRepo"`
 }
 
 type Agent struct {
