@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/douyu/juno/internal/pkg/service/confgo"
+
 	"github.com/douyu/juno/pkg/cfg"
 	"github.com/douyu/jupiter/pkg/xlog"
 
@@ -228,6 +230,17 @@ func Delete(c echo.Context) (err error) {
 
 	err = confgov2.Delete(c, param.ID)
 	if err != nil {
+		return output.JSON(c, output.MsgErr, err.Error())
+	}
+
+	return output.JSON(c, output.MsgOk, "")
+}
+
+// Delete ..
+func Save(c echo.Context) (err error) {
+	err = confgo.ConfuSrv.ConfigSaveWorker("manual")
+	if err != nil {
+		xlog.Error("config", xlog.String("event", "config_save"), xlog.String("step", "call"), xlog.String("err", err.Error()))
 		return output.JSON(c, output.MsgErr, err.Error())
 	}
 
